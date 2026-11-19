@@ -1,0 +1,6 @@
+{
+  "name": "Professional Internship Portal",
+  "description": "A clean and modern UI for the National Internship Program of Rwanda, empowering graduates through practical experience.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

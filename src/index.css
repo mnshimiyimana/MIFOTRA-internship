@@ -1,0 +1,512 @@
+@import "@fontsource-variable/nunito";
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-heading: "Nunito Variable", "Nunito", sans-serif;
+  --color-portal-blue: #d5e9fc;
+  --color-portal-navy: #122970;
+  --font-sans: "Nunito Variable", "Nunito", sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --white: #ffffff;
+  --background: #ffff;
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: #2b5ec2;
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: #4b5b6e;
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #d9e3ef;
+  --input: oklch(0.922 0 0);
+  --ring: #2b5ec2;
+  --radius: 0.625rem;
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  .nav-top-notifier {
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    bottom: 0;
+  }
+
+  .app-wrapper {
+    font-family: Nunito Sans;
+    color: #2e2e2e;
+    border: 1px solid #ffcb2d;
+    background-color: #ffca2d6e;
+    position: relative;
+    height: 55px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+  .flex-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .ico-bell {
+    color: #0099e8;
+    width: 24px;
+    height: 24px;
+  }
+  .feather-bell {
+    color: #0099e8;
+  }
+  .app-message {
+    padding: 10px 40px 10px 10px;
+    margin-top: 0;
+  }
+  .app-message a {
+    color: var(--color-blue-600);
+    text-decoration: none;
+  }
+}
+
+@theme {
+  --animate-marquee: marquee 60s linear infinite;
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+main > section[id] {
+  scroll-margin-top: 6rem;
+}
+
+/* Tailwind v4 no longer gives buttons a pointer cursor; every clickable
+   control should show one. */
+:where(button:not(:disabled), [role="button"], [role="tab"], summary, label[for]) {
+  cursor: pointer;
+}
+
+:where(a, button, summary, [tabindex]):focus-visible {
+  outline: 3px solid #2b5ec2;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.portal-hero {
+  background:
+    radial-gradient(60rem 30rem at 85% 10%, rgb(141 183 239 / 35%), transparent 70%),
+    radial-gradient(40rem 26rem at 5% 90%, rgb(242 201 76 / 10%), transparent 70%),
+    linear-gradient(115deg, #eaf3ff, #d9e8fd);
+}
+
+.site-header {
+  background: #ffffff;
+  border-bottom: 1px solid #d9e3ef;
+  box-shadow: 0 3px 16px rgb(22 54 104 / 7%);
+  transition:
+    background-color 250ms ease,
+    border-color 250ms ease,
+    box-shadow 250ms ease;
+}
+
+/* Top of the page: no surface at all, the hero shows straight through */
+.site-header[data-surface="clear"] {
+  background: transparent;
+  border-bottom-color: transparent;
+  box-shadow: none;
+}
+
+/* Scrolling within the hero: same tint as the hero, so it still blends */
+.site-header[data-surface="hero"] {
+  background: #e4eefd;
+  border-bottom-color: transparent;
+  box-shadow: 0 6px 20px -16px rgb(22 54 104 / 35%);
+}
+
+.workflow-illustration {
+  background: radial-gradient(ellipse at 49% 44%, #edf7ff, #cbdff6 76%);
+}
+
+.workflow-illustration-rings {
+  background: repeating-radial-gradient(
+    circle at center,
+    transparent 0 22px,
+    rgb(91 139 193 / 18%) 22px 23px
+  );
+  mask-image: radial-gradient(circle, black 32%, transparent 72%);
+}
+
+.program-card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: clamp(1.375rem, 1.1rem + 1vw, 1.75rem);
+  font-weight: 750;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.internship-shader {
+  opacity: 0.72;
+}
+
+.internship-illustration {
+  container-type: inline-size;
+}
+
+.internship-illustration-grid {
+  background: radial-gradient(circle, #7a9ecd88 1px, transparent 1.5px) 0 0 /
+    9px 9px;
+  mask-image: radial-gradient(ellipse at center, black 15%, transparent 72%);
+}
+
+.internship-pathway-icon {
+  display: grid;
+  width: 17cqw;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid #b6cdef;
+  border-radius: 23%;
+  box-shadow: 0 12px 26px -12px #345d92aa;
+}
+
+.internship-pathway-icon svg {
+  width: 52%;
+  height: 52%;
+}
+
+.internship-document-header {
+  padding: 2.8cqw 4cqw;
+}
+
+.internship-document-header svg {
+  width: 4cqw;
+  height: 4cqw;
+}
+
+.internship-document-body {
+  padding: 3.5cqw 4cqw;
+  gap: 3cqw;
+}
+
+.internship-document-avatar {
+  width: 9cqw;
+  aspect-ratio: 1;
+}
+
+.internship-document-avatar svg,
+.internship-approval svg {
+  width: 55%;
+  height: 55%;
+}
+
+.internship-approval {
+  width: 11cqw;
+  aspect-ratio: 1;
+}
+
+.portal-card {
+  transition:
+    box-shadow 200ms ease,
+    border-color 200ms ease;
+}
+
+.portal-card:hover {
+  border-color: #a3bce7;
+  box-shadow: 0 10px 24px rgb(18 41 112 / 8%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .portal-hero-copy > * {
+    animation: portal-enter 550ms both cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+
+  .portal-hero-copy > :nth-child(2) {
+    animation-delay: 70ms;
+  }
+
+  .portal-hero-copy > :nth-child(3) {
+    animation-delay: 140ms;
+  }
+
+  @keyframes portal-enter {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Liquid glass surfaces ─────────────────────────────────────────── */
+
+
+
+
+
+/* ── Hero ──────────────────────────────────────────────────────────── */
+
+
+.hero-highlight {
+  background: linear-gradient(100deg, #2453b8 0%, #3d78e0 60%, #5e97f2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* The heading's tight tracking pushes the last glyph past the box, where
+     the clipped gradient isn't painted. Widen the paint area, keep layout. */
+  padding-inline-end: 0.12em;
+  margin-inline-end: -0.12em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.hero-scene-bleed {
+  --fade-x: linear-gradient(to right, transparent, #000 16%, #000 78%, transparent);
+  --fade-y: linear-gradient(to bottom, transparent, #000 10%, #000 88%, transparent);
+  -webkit-mask-image: var(--fade-x), var(--fade-y);
+  -webkit-mask-composite: source-in;
+  mask-image: var(--fade-x), var(--fade-y);
+  mask-composite: intersect;
+}
+
+@media (width < 48rem) {
+  .hero-scene-bleed {
+    --fade-x: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+  }
+}
+
+.bridge-label {
+  border: 1px solid rgb(255 255 255 / 85%);
+  background: rgb(255 255 255 / 62%);
+  box-shadow: 0 10px 24px -12px rgb(18 41 112 / 45%);
+  backdrop-filter: blur(10px) saturate(170%);
+  -webkit-backdrop-filter: blur(10px) saturate(170%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bridge-label {
+    animation: bridge-label-in 600ms both cubic-bezier(0.2, 0.9, 0.3, 1.3);
+  }
+
+  @keyframes bridge-label-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.85);
+    }
+  }
+
+  .portal-hero-copy > :nth-child(4) {
+    animation-delay: 210ms;
+  }
+
+  /* Gentle entrance for content blocks as they scroll into view */
+  .reveal {
+    animation: reveal-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(28px) scale(0.985);
+    }
+  }
+}
+
+/* ── Section rhythm ────────────────────────────────────────────────── */
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.section-eyebrow::before {
+  content: "";
+  width: 1.5rem;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--primary), #f2c94c);
+}
+
+.section-eyebrow-light {
+  color: #bcd3ff;
+}
+
+
+/* ── Impact story (light, hero palette) ─────────────────────────────── */
+
+.impact-story {
+  background:
+    radial-gradient(50rem 30rem at 85% 30%, rgb(141 183 239 / 40%), transparent 70%),
+    radial-gradient(40rem 24rem at 0% 100%, rgb(242 201 76 / 12%), transparent 70%),
+    linear-gradient(rgb(18 41 112 / 4%) 1px, transparent 1px) 0 0 / 100% 72px,
+    linear-gradient(90deg, rgb(18 41 112 / 4%) 1px, transparent 1px) 0 0 / 72px 100%,
+    linear-gradient(115deg, #eaf3ff, #d9e8fd);
+}
+
+/* Dots differ by fill, not just colour: empty = faint ring, placed = solid
+   blue, employed = solid gold with a ring. */
+.impact-dot {
+  display: inline-block;
+  box-shadow: inset 0 0 0 1.5px rgb(18 41 112 / 18%);
+  transform: scale(0.55);
+  transition:
+    transform 260ms cubic-bezier(0.2, 0.9, 0.3, 1.3),
+    background-color 260ms ease,
+    box-shadow 260ms ease;
+}
+
+.impact-dot[data-state="placed"] {
+  background: #2b5ec2;
+  box-shadow: none;
+  transform: scale(1);
+}
+
+.impact-dot[data-state="employed"] {
+  background: #f0bb26;
+  box-shadow:
+    inset 0 0 0 1.5px rgb(150 105 0 / 35%),
+    0 0 10px rgb(240 187 38 / 45%);
+  transform: scale(1);
+}
+
+/* ── Shared scale (one rhythm for every section) ───────────────────── */
+
+.section-pad {
+  padding-block: clamp(4rem, 3rem + 4vw, 7rem);
+}
+
+.section-title {
+  font-size: clamp(2rem, 1.35rem + 2.3vw, 3rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.section-lede {
+  max-width: 62ch;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
