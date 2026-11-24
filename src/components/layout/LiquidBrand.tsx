@@ -1,16 +1,18 @@
 import { LiquidMetal } from "@paper-design/shaders-react";
 import logo from "@/assets/logo-removebg-preview.png";
+import logoWhite from "@/assets/logo-white.png";
 
-export default function LiquidBrand() {
+/** Hover shimmer over the brand: the white logo on blue, the original on white. */
+export default function LiquidBrand({ onBlue = false }: { onBlue?: boolean }) {
   return (
     <span
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 overflow-hidden"
     >
       <LiquidMetal
-        image={logo}
-        colorBack="#ffffff00"
-        colorTint="#88b2f5"
+        image={onBlue ? logoWhite : logo}
+        colorBack={onBlue ? "#2e4d8400" : "#ffffff00"}
+        colorTint={onBlue ? "#f7d117" : "#7fa6ef"}
         repetition={3}
         softness={0.55}
         shiftRed={0}
@@ -23,7 +25,7 @@ export default function LiquidBrand() {
         fit="contain"
         minPixelRatio={1}
         maxPixelCount={90000}
-        style={{ width: "100%", height: "100%", opacity: 0.52 }}
+        style={{ width: "100%", height: "100%", opacity: onBlue ? 0.35 : 0.52 }}
       />
     </span>
   );

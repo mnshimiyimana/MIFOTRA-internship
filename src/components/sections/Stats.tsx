@@ -65,7 +65,7 @@ export function Stats() {
       ref={sectionRef}
       className="relative mx-auto max-w-7xl px-6 pb-8 md:pb-10"
     >
-      <div className="grid grid-cols-3 divide-x divide-[#c8d9ed] rounded-2xl border border-white/80 bg-white/75 py-5 shadow-[0_18px_40px_-28px_rgb(18_41_112/45%)] md:py-7">
+      <div className="grid grid-cols-3 divide-x divide-[#c8d9ed] rounded-2xl border border-white/20 bg-white/95 py-5 shadow-[0_18px_40px_-28px_rgb(18_41_112/45%)] md:py-7">
         {stats.map((stat, i) => {
           const { target, suffix } = parseTargetValue(stat.value);
           const value = reduceMotion ? target : counts[i];

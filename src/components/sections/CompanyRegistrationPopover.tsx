@@ -14,10 +14,10 @@ const options = [
     description: "View all companies you registered.",
     href: "https://auth.ippis.rw/signin/?service=Employer%20Portal&continue=https://employer.ippis.rw/",
     styles: {
-      row: "bg-blue-50/70 hover:bg-blue-100/70",
-      icon: "bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white",
-      title: "group-hover:text-blue-700",
-      arrow: "text-blue-400 group-hover:text-blue-600",
+      row: "bg-[#eef3fb] hover:bg-[#e1e9f7]",
+      icon: "bg-[#dbe5f6] text-book-blue group-hover:bg-book-blue group-hover:text-white",
+      title: "group-hover:text-book-blue",
+      arrow: "text-[#7f97c8] group-hover:text-book-blue",
     },
   },
   {

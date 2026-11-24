@@ -2,21 +2,15 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { CompanyRegistrationPopover } from "@/components/sections/CompanyRegistrationPopover";
 import { ArrowRight } from "lucide-react";
-import { lazy, useRef } from "react";
 import { motion } from "motion/react";
 import {
-  WebGLDecoration,
-  useIdleMount,
-  useNearViewport,
-} from "@/components/ui/WebGLDecoration";
-import programMark from "@/assets/program-mark.svg";
+  CAP_WIDTH,
+  CapArt,
+  CapPicker,
+  showCapPicker,
+  useCapOption,
+} from "./CapArt";
 
-const CtaGradient = lazy(() =>
-  import("./CtaScene").then((m) => ({ default: m.CtaGradient })),
-);
-const ProgramMarkMetal = lazy(() =>
-  import("./CtaScene").then((m) => ({ default: m.ProgramMarkMetal })),
-);
 
 const programFacts = [
   {
@@ -49,7 +43,7 @@ function FactsPath() {
               "absolute top-1 left-0 size-[0.95rem] rounded-full border-2 sm:top-0",
               i === programFacts.length - 1
                 ? "border-[#f2c94c] bg-[#f2c94c]"
-                : "border-[#9dbcf5] bg-[#142a76]",
+                : "border-[#9dbcf5] bg-book-blue",
             )}
           />
           <p className="text-[0.7rem] font-bold tracking-[0.14em] text-[#a9c4f5] uppercase">
@@ -65,28 +59,18 @@ function FactsPath() {
 }
 
 export function CTA() {
-  const band = useRef<HTMLDivElement>(null);
-  const near = useNearViewport(band);
-  const idle = useIdleMount();
-  const mounted = idle || near;
-
+  const [capOption, setCapOption] = useCapOption();
   return (
     <section className="section-pad bg-white px-6">
       <motion.div
-        ref={band}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative isolate mx-auto max-w-[77rem] overflow-hidden rounded-3xl bg-[#142a76] px-5 py-12 text-white md:px-12 md:py-16"
+        className="relative isolate mx-auto max-w-[77rem] overflow-hidden rounded-3xl book-surface px-5 py-12 text-white md:px-12 md:py-16"
       >
-        {mounted && (
-          <div aria-hidden="true" className="absolute inset-0 -z-10">
-            <WebGLDecoration>
-              <CtaGradient active={near} />
-            </WebGLDecoration>
-            {/* Keeps text contrast steady whatever the gradient is doing */}
-            <div className="absolute inset-0 bg-linear-to-r from-[#0d1f5c]/70 via-[#122970]/35 to-transparent" />
-          </div>
+
+        {showCapPicker && (
+          <CapPicker value={capOption} onChange={setCapOption} />
         )}
 
         <div className="grid items-center gap-10 lg:grid-cols-[1.35fr_1fr]">
@@ -130,22 +114,9 @@ export function CTA() {
 
           <div
             aria-hidden="true"
-            className="relative mx-auto hidden aspect-square w-full max-w-[22rem] lg:block"
+            className={`mx-auto hidden w-full lg:block ${CAP_WIDTH[capOption]}`}
           >
-            <div className="absolute inset-[12%] rounded-full bg-[#5d8ee8]/25 blur-3xl" />
-            {mounted && (
-              <WebGLDecoration
-                fallback={
-                  <img
-                    src={programMark}
-                    alt=""
-                    className="relative size-full p-[12%] opacity-25 invert"
-                  />
-                }
-              >
-                <ProgramMarkMetal active={near} />
-              </WebGLDecoration>
-            )}
+            <CapArt option={capOption} />
           </div>
         </div>
       </motion.div>

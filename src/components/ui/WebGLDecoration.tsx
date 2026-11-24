@@ -35,7 +35,13 @@ function detectWebGL2() {
 
 /** True when the user allows motion and the browser supports WebGL2. */
 export function useWebGLEnabled() {
-  const [enabled, setEnabled] = useState(false);
+  // Decided before the first paint, so the static fallback never flashes up
+  // on devices that will show the 3D scene.
+  const [enabled, setEnabled] = useState(
+    () =>
+      window.matchMedia("(prefers-reduced-motion: no-preference)").matches &&
+      detectWebGL2(),
+  );
 
   useEffect(() => {
     const preference = window.matchMedia(
@@ -118,7 +124,9 @@ export function WebGLDecoration({
 
   return enabled ? (
     <DecorationBoundary fallback={fallback}>
-      <Suspense fallback={fallback}>{children}</Suspense>
+      {/* Nothing while the scene's code loads: showing the static fallback
+          here made it flash before the 3D scene replaced it. */}
+      <Suspense fallback={null}>{children}</Suspense>
     </DecorationBoundary>
   ) : (
     fallback

@@ -314,9 +314,11 @@ function ScrollStory() {
   const track = useRef<HTMLDivElement>(null);
   const field = useRef<HTMLDivElement>(null);
   const [act, setAct] = useState(0);
+  // Matches when the story is actually pinned (it is centred, not at the
+  // top), so there is no dead scrolling before or after it.
   const { scrollYProgress } = useScroll({
     target: track,
-    offset: ["start start", "end end"],
+    offset: ["start 25%", "end 80%"],
   });
   useDrivenDots(field, scrollYProgress, true);
   useMotionValueEvent(scrollYProgress, "change", (p) =>
@@ -327,12 +329,15 @@ function ScrollStory() {
   );
 
   return (
-    <div ref={track} className="relative h-[320vh]">
-      <div className="sticky top-0 flex h-svh flex-col justify-center overflow-hidden pt-20">
+    <div ref={track} className="relative h-[250vh]">
+      {/* Pinned at its own height, centred in the space under the navbar:
+          enters right below the header, and while pinned the leftover space
+          splits evenly above and below instead of piling up underneath. */}
+      <div className="sticky top-[max(5.5rem,calc(50svh-12rem))] overflow-hidden pt-4 pb-10">
         <div className="mx-auto grid w-full max-w-7xl grid-cols-[1fr_minmax(0,32rem)] items-center gap-20 px-6">
           <div className="flex flex-col gap-10">
             <ActRail progress={scrollYProgress} />
-            <div className="min-h-[24rem]">
+            <div className="min-h-[22rem]">
               <AnimatePresence mode="wait" initial={false}>
                 <ActText key={act} progress={scrollYProgress} index={act} />
               </AnimatePresence>
@@ -438,7 +443,7 @@ function EmployedWaffle() {
 function CompactStory() {
   const reduceMotion = useReducedMotion();
   return (
-    <div className="mx-auto grid max-w-3xl gap-10 px-6 pb-16">
+    <div className="mx-auto grid max-w-3xl gap-8 px-6 pb-10">
       {acts.map((a, i) => (
         <motion.div
           key={a.step}
@@ -470,7 +475,11 @@ function CompactStory() {
               {a.desc}
             </p>
           </div>
-          {i === 1 && <EmployedWaffle />}
+          {i === 1 && (
+            <div className="hidden md:block">
+              <EmployedWaffle />
+            </div>
+          )}
         </motion.div>
       ))}
       <motion.div
@@ -501,7 +510,7 @@ export function Impact() {
           eyebrow="Our impact"
           title="Results that speak for the program"
           lede="We are proud of the tangible results our program has delivered for graduates and the nation."
-          className="mb-10 md:mb-14"
+          className="mb-6 md:mb-8"
         />
       </div>
 
@@ -522,9 +531,7 @@ export function Impact() {
         {story ? (
           <ScrollStory />
         ) : (
-          <div className="pt-4">
-            <CompactStory />
-          </div>
+          <CompactStory />
         )}
       </div>
     </section>

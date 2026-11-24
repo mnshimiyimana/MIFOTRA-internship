@@ -1,7 +1,9 @@
 import { lazy, useEffect, useState } from "react";
-import { LogIn, Menu, X } from "lucide-react";
+import { ArrowRight, Building2, LogIn, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import logo from "@/assets/logo-removebg-preview.png";
+import logoWhite from "@/assets/logo-white.png";
+import { CompanyRegistrationPopover } from "@/components/sections/CompanyRegistrationPopover";
 import { WebGLDecoration } from "@/components/ui/WebGLDecoration";
 import { cn } from "@/lib/utils";
 
@@ -71,9 +73,14 @@ export function Navbar() {
     return () => desktop.removeEventListener("change", closeOnDesktop);
   }, []);
 
-  // Top of page: fully clear. Scrolling within the hero: hero-tinted so the
-  // hero's content doesn't show through. Past the hero: white.
-  const surface = isMenuOpen || !overHero ? "solid" : atTop ? "clear" : "hero";
+  // Over the hero: the hero's blue (clear at the very top). Past the hero:
+  // the original white bar.
+  const surface = !overHero
+    ? "solid"
+    : atTop && !isMenuOpen
+      ? "clear"
+      : "hero";
+  const onBlue = surface !== "solid";
 
   return (
     <header
@@ -100,13 +107,13 @@ export function Navbar() {
           onClick={() => setIsMenuOpen(false)}
         >
           <img
-            src={logo}
+            src={onBlue ? logoWhite : logo}
             alt="National Professional Internship"
             className="h-auto max-h-11 w-full max-w-[14.5rem] object-contain sm:max-h-13 lg:max-w-[15.5rem]"
           />
           {(isBrandHovered || isBrandFocused) && (
             <WebGLDecoration>
-              <LiquidBrand />
+              <LiquidBrand onBlue={onBlue} />
             </WebGLDecoration>
           )}
         </a>
@@ -122,7 +129,12 @@ export function Navbar() {
               target={target}
               rel={target ? "noopener noreferrer" : undefined}
               aria-current={activeSection === href ? "location" : undefined}
-              className="relative whitespace-nowrap px-3 py-3 text-sm font-bold text-[#22324a] transition-colors after:absolute after:inset-x-3 after:bottom-1 after:h-0.5 after:origin-center after:scale-x-0 after:rounded-full after:bg-primary after:transition-transform hover:text-primary hover:after:scale-x-100 focus-visible:after:scale-x-100 aria-[current=location]:text-primary aria-[current=location]:after:scale-x-100 xl:px-4"
+              className={cn(
+                "relative whitespace-nowrap px-3 py-3 text-sm font-bold transition-colors after:absolute after:inset-x-3 after:bottom-1 after:h-0.5 after:origin-center after:scale-x-0 after:rounded-full after:transition-transform hover:after:scale-x-100 focus-visible:after:scale-x-100 aria-[current=location]:after:scale-x-100 xl:px-4",
+                onBlue
+                  ? "text-white/80 after:bg-book-yellow hover:text-white aria-[current=location]:text-white"
+                  : "text-[#22324a] after:bg-primary hover:text-primary aria-[current=location]:text-primary",
+              )}
             >
               {name}
             </a>
@@ -133,7 +145,12 @@ export function Navbar() {
           href="https://internship.ippis.rw"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-primary px-3.5 text-sm font-bold text-white transition-colors hover:bg-[#2350aa] sm:px-5"
+          className={cn(
+            "inline-flex min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-3.5 text-sm font-bold transition-colors sm:px-5",
+            onBlue
+              ? "bg-white text-book-blue hover:bg-[#eaf2ff]"
+              : "bg-primary text-white hover:bg-[#24448a]",
+          )}
         >
           <LogIn className="hidden size-4 sm:block" aria-hidden="true" />
           Sign in
@@ -146,7 +163,10 @@ export function Navbar() {
           aria-expanded={isMenuOpen}
           aria-controls={isMenuOpen ? "mobile-navigation" : undefined}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="grid size-11 shrink-0 place-items-center rounded-full hover:bg-primary/10 lg:hidden"
+          className={cn(
+            "grid size-11 shrink-0 place-items-center rounded-full lg:hidden",
+            onBlue ? "text-white hover:bg-white/10" : "hover:bg-primary/10",
+          )}
         >
           {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
@@ -161,7 +181,10 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18 }}
-            className="absolute inset-x-0 top-full grid gap-1 border-b bg-white px-4 py-3 shadow-lg sm:px-6 lg:hidden"
+            className={cn(
+              "absolute inset-x-0 top-full grid gap-1 px-4 py-3 shadow-lg sm:px-6 lg:hidden",
+              onBlue ? "border-t border-white/10 bg-book-blue" : "border-b bg-white",
+            )}
           >
             {navLinks.map(({ name, href, target }) => (
               <a
@@ -172,13 +195,48 @@ export function Navbar() {
                 aria-current={activeSection === href ? "location" : undefined}
                 onClick={() => setIsMenuOpen(false)}
                 className={cn(
-                  "rounded-xl px-4 py-3 font-bold text-portal-navy hover:bg-primary/5",
-                  "aria-[current=location]:bg-primary/10 aria-[current=location]:text-primary",
+                  "rounded-xl px-4 py-3 font-bold",
+                  onBlue
+                    ? "text-white/85 hover:bg-white/10 hover:text-white aria-[current=location]:bg-white/10 aria-[current=location]:text-white"
+                    : "text-portal-navy hover:bg-primary/5 aria-[current=location]:bg-primary/10 aria-[current=location]:text-primary",
                 )}
               >
                 {name}
               </a>
             ))}
+            <div
+              className={cn(
+                "mt-2 grid gap-2 border-t pt-4 pb-1 sm:grid-cols-2",
+                onBlue ? "border-white/10" : "border-[#d9e3ef]",
+              )}
+            >
+              <a
+                href="https://recruitment.mifotra.gov.rw"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMenuOpen(false)}
+                className={cn(
+                  "inline-flex h-12 items-center justify-center gap-2 rounded-full px-5 text-sm font-bold",
+                  onBlue
+                    ? "bg-white text-book-blue hover:bg-[#eaf2ff]"
+                    : "bg-primary text-white hover:bg-[#24448a]",
+                )}
+              >
+                Apply for Internship
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </a>
+              <CompanyRegistrationPopover
+                className={cn(
+                  "inline-flex h-12 items-center justify-center gap-2 rounded-full border px-5 text-sm font-bold",
+                  onBlue
+                    ? "border-white/40 bg-white/10 text-white hover:bg-white/20"
+                    : "border-[#b9cce8] bg-white text-primary hover:bg-[#f5f9ff]",
+                )}
+              >
+                <Building2 className="size-4" aria-hidden="true" />
+                Company Registration
+              </CompanyRegistrationPopover>
+            </div>
           </motion.nav>
         )}
       </AnimatePresence>

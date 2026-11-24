@@ -90,13 +90,60 @@ const year = new Date().getFullYear();
 
 /* ── Shared pieces ───────────────────────────────────────────────────── */
 
-/** Thin stripe in the national flag's colours. */
-function FlagStripe() {
+/*
+ * Imigongo band, after the strip along the bottom of the National Induction
+ * Programme cover: a zigzag of triangles, each filled with nested chevrons,
+ * pointing up and down in turn and cycling yellow, sky blue and green.
+ *
+ * Drawn as plain vector paths (one per colour) rather than an SVG <pattern>:
+ * pattern tiles get rasterised and soften on high-density screens.
+ */
+const BAND_H = 44; // triangle height
+const BAND_W = 88; // triangle base (45° sides, like the cover)
+const BAND_COLORS = ["#f7d117", "#3cb4ea", "#3f9b4f"];
+const BAND_LINES = [3, 11, 19, 27, 35]; // chevron offsets from the base
+const BAND_SPAN = 3840; // widest screen we draw for; the rest is clipped
+
+const bandPaths = (() => {
+  const paths = ["", "", ""];
+  const count = Math.ceil(BAND_SPAN / (BAND_W / 2)) + 1;
+  for (let k = -1; k < count; k++) {
+    const cx = (k * BAND_W) / 2 + BAND_W / 2;
+    const up = k % 2 === 0;
+    for (const d of BAND_LINES) {
+      const half = ((BAND_H - d) * BAND_W) / (2 * BAND_H);
+      const tip = up ? d : BAND_H - d;
+      // Run each line a little past the edge so it is cut cleanly by the clip
+      const base = up ? BAND_H + 2 : -2;
+      const reach = half + 2;
+      paths[((k % 3) + 3) % 3] +=
+        `M${cx - reach} ${base}L${cx} ${tip}L${cx + reach} ${base}`;
+    }
+  }
+  return paths;
+})();
+
+function ImigongoBand() {
   return (
-    <div aria-hidden="true" className="flex h-1">
-      <span className="flex-[2] bg-[#00a1de]" />
-      <span className="flex-1 bg-[#fad201]" />
-      <span className="flex-1 bg-[#20603d]" />
+    <div aria-hidden="true" className="overflow-hidden bg-white">
+      <svg
+        width={BAND_SPAN}
+        height={BAND_H}
+        viewBox={`0 0 ${BAND_SPAN} ${BAND_H}`}
+        className="block max-w-none"
+        shapeRendering="geometricPrecision"
+      >
+        {bandPaths.map((d, i) => (
+          <path
+            key={i}
+            d={d}
+            fill="none"
+            stroke={BAND_COLORS[i]}
+            strokeWidth="2.6"
+            strokeLinejoin="miter"
+          />
+        ))}
+      </svg>
     </div>
   );
 }
@@ -229,7 +276,7 @@ function HelpDeskFooter() {
     "group flex min-h-24 items-center gap-4 px-1 py-5 transition-colors sm:px-6 hover:bg-white";
   return (
     <footer id="footer" className="bg-[#f4f7fb]">
-      <FlagStripe />
+      <ImigongoBand />
       <div className="mx-auto max-w-7xl px-6">
         <div className="pt-14">
           <h2 className="font-heading text-2xl font-bold tracking-tight text-portal-navy sm:text-3xl">

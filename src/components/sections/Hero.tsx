@@ -25,11 +25,11 @@ export function Hero() {
     <section
       ref={hero}
       id="home"
-      className="portal-hero relative isolate -mt-[4.5rem] overflow-hidden pt-[4.5rem] lg:-mt-20 lg:pt-20"
+      className="portal-hero book-surface relative isolate -mt-[4.5rem] overflow-hidden pt-[4.5rem] lg:-mt-20 lg:pt-20"
     >
       <div className="relative mx-auto grid max-w-7xl items-center gap-6 px-6 pt-10 pb-8 md:grid-cols-[1.05fr_1fr] md:gap-4 md:py-12 lg:min-h-[min(40rem,calc(100svh-12rem))]">
         <div className="portal-hero-copy relative z-10 flex max-w-xl flex-col items-start gap-6">
-          <p className="hero-eyebrow inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/70 px-3 py-1.5 text-xs font-bold tracking-wide text-primary">
+          <p className="hero-eyebrow inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-bold tracking-wide text-white">
             <Landmark className="size-3.5" aria-hidden="true" />
             <span>
               MIFOTRA
@@ -41,24 +41,25 @@ export function Hero() {
             </span>
           </p>
 
-          <h1 className="font-heading text-[clamp(2.5rem,4.3vw,3.9rem)] leading-[1.01] font-extrabold tracking-[-0.055em] text-portal-navy">
+          <h1 className="font-heading text-[clamp(2.5rem,4.3vw,3.9rem)] leading-[1.01] font-extrabold tracking-[-0.055em] text-white">
             Embrace Your Future with{" "}
             <span className="hero-highlight">confidence</span>
           </h1>
 
-          <p className="max-w-lg text-base leading-relaxed text-[#263950] md:text-lg">
+          <p className="max-w-lg text-base leading-relaxed text-[#d6e4fb] md:text-lg">
             A national pathway connecting talented graduates with institutions
             ready to invest in tomorrow’s professionals.
           </p>
 
-          <div className="flex w-full flex-wrap items-center gap-3 pt-2">
+          {/* On phones these two live in the menu instead. */}
+          <div className="hidden w-full flex-wrap items-center gap-3 pt-2 md:flex">
             <a
               href="https://recruitment.mifotra.gov.rw"
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
                 buttonVariants(),
-                "group h-12 gap-2 rounded-full px-5 text-sm font-bold shadow-[0_10px_24px_-10px_#2b5ec2] hover:bg-[#2350aa] sm:text-base",
+                "group h-12 gap-2 rounded-full bg-white px-5 text-sm font-bold text-book-blue shadow-[0_10px_24px_-12px_rgb(0_0_0/45%)] hover:bg-[#eaf2ff] sm:text-base",
               )}
             >
               Apply for Internship
@@ -70,7 +71,7 @@ export function Hero() {
             <CompanyRegistrationPopover
               className={cn(
                 buttonVariants({ variant: "outline" }),
-                "h-12 gap-2 rounded-full border-[#b9cce8] bg-white/85 px-5 text-sm font-bold text-primary hover:bg-white hover:text-primary sm:text-base",
+                "h-12 gap-2 rounded-full border-white/40 bg-white/10 px-5 text-sm font-bold text-white hover:bg-white/20 hover:text-white sm:text-base",
               )}
             >
               <Building2 className="size-4" aria-hidden="true" />
@@ -96,17 +97,17 @@ export function Hero() {
               <BridgeWorld progress={scrollYProgress} active={near} />
             </div>
             <span
-              className="bridge-label absolute top-[20%] left-[8%] inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold text-portal-navy"
+              className="bridge-label absolute top-[20%] left-[8%] inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold text-white"
               style={{ animationDelay: "1.3s" }}
             >
-              <GraduationCap className="size-3.5 text-primary" />
+              <GraduationCap className="size-3.5 text-white" />
               Graduates
             </span>
             <span
-              className="bridge-label absolute top-[12%] right-[6%] inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold text-portal-navy"
+              className="bridge-label absolute top-[12%] right-[6%] inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold text-white"
               style={{ animationDelay: "1.5s" }}
             >
-              <Building2 className="size-3.5 text-primary" />
+              <Building2 className="size-3.5 text-white" />
               Employers
             </span>
           </WebGLDecoration>

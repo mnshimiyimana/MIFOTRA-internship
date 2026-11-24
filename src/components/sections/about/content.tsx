@@ -92,7 +92,7 @@ export const applicationSteps = [
 export function Eligibility({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`rounded-2xl bg-[#18336f] px-5 py-4 text-white ${className}`}
+      className={`book-surface rounded-2xl px-5 py-4 text-white ${className}`}
     >
       <h4 className="flex items-center gap-2 font-bold">
         <UserCheck

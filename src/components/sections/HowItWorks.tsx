@@ -70,6 +70,20 @@ function useScrollDriven() {
   return desktop && !reduceMotion;
 }
 
+/** Phones: the scene was too small to read there, so it is left out. */
+function usePhone() {
+  const [phone, setPhone] = useState(
+    () => window.matchMedia("(max-width: 767px)").matches,
+  );
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 767px)");
+    const update = () => setPhone(query.matches);
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+  return phone;
+}
+
 function StepIllustration({ step }: { step: number }) {
   const reduceMotion = useReducedMotion();
   const { icon: SelectedIcon, tilt } = steps[step];
@@ -110,6 +124,7 @@ export function HowItWorks() {
   const [selectedStep, setSelectedStep] = useState(0);
   const reduceMotion = useReducedMotion();
   const scrollDriven = useScrollDriven();
+  const phone = usePhone();
   const track = useRef<HTMLDivElement>(null);
   const illustration = useRef<HTMLDivElement>(null);
   const isInView = useInView(illustration, { amount: 0.5 });
@@ -137,7 +152,7 @@ export function HowItWorks() {
 
   // Small screens: auto-play through the steps once the section is seen.
   useEffect(() => {
-    if (scrollDriven || reduceMotion || !isInView) return;
+    if (scrollDriven || phone || reduceMotion || !isInView) return;
 
     setSelectedStep(0);
     const timers = steps
@@ -146,7 +161,7 @@ export function HowItWorks() {
         window.setTimeout(() => setSelectedStep(index + 1), (index + 1) * 2200),
       );
     return () => timers.forEach((timer) => window.clearTimeout(timer));
-  }, [scrollDriven, isInView, reduceMotion]);
+  }, [scrollDriven, phone, isInView, reduceMotion]);
 
   useEffect(() => {
     if (scrollDriven) return;
@@ -202,6 +217,7 @@ export function HowItWorks() {
             }
           >
             <div className="grid overflow-hidden rounded-[1.5rem] border border-[#d9e6f4] bg-white md:grid-cols-[1.05fr_1fr]">
+              {!phone && (
               <div
                 ref={illustration}
                 aria-hidden="true"
@@ -231,6 +247,7 @@ export function HowItWorks() {
                   </div>
                 </WebGLDecoration>
               </div>
+              )}
 
               <ol className="flex flex-col justify-center divide-y divide-[#e8eef6] px-4 py-2 sm:px-6 md:px-7 md:py-4">
                 {steps.map(({ title, description, icon: Icon }, index) => (
