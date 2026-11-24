@@ -1,13 +1,10 @@
-import { lazy, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRight, Building2, LogIn, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import logo from "@/assets/logo-removebg-preview.png";
-import logoWhite from "@/assets/logo-white.png";
 import { CompanyRegistrationPopover } from "@/components/sections/CompanyRegistrationPopover";
-import { WebGLDecoration } from "@/components/ui/WebGLDecoration";
+import coatOfArms from "@/assets/coat-of-arms-white.png";
 import { cn } from "@/lib/utils";
 
-const LiquidBrand = lazy(() => import("./LiquidBrand"));
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -27,10 +24,7 @@ const sectionLinks = navLinks.filter(({ href }) => href.startsWith("#"));
 export function Navbar() {
   const [activeSection, setActiveSection] = useState("#home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [overHero, setOverHero] = useState(true);
   const [atTop, setAtTop] = useState(true);
-  const [isBrandHovered, setIsBrandHovered] = useState(false);
-  const [isBrandFocused, setIsBrandFocused] = useState(false);
 
   useEffect(() => {
     let frame = 0;
@@ -38,9 +32,7 @@ export function Navbar() {
       frame = 0;
       const headerHeight =
         document.getElementById("site-header")?.offsetHeight ?? 80;
-      const hero = document.getElementById("home");
       setAtTop(window.scrollY < 8);
-      setOverHero(!!hero && hero.getBoundingClientRect().bottom > headerHeight);
       const current = [...sectionLinks].reverse().find(({ href }) => {
         const section = document.getElementById(href.slice(1));
         return (
@@ -73,14 +65,10 @@ export function Navbar() {
     return () => desktop.removeEventListener("change", closeOnDesktop);
   }, []);
 
-  // Over the hero: the hero's blue (clear at the very top). Past the hero:
-  // the original white bar.
-  const surface = !overHero
-    ? "solid"
-    : atTop && !isMenuOpen
-      ? "clear"
-      : "hero";
-  const onBlue = surface !== "solid";
+  // The hero's blue all the way down (clear at the very top, where the hero
+  // itself shows through).
+  const surface = atTop && !isMenuOpen ? "clear" : "hero";
+  const onBlue = true;
 
   return (
     <header
@@ -97,25 +85,18 @@ export function Navbar() {
       <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center gap-2 px-4 sm:gap-4 sm:px-6 lg:h-20">
         <a
           href="#home"
-          className="relative mr-auto min-w-0"
-          onPointerEnter={(event) => {
-            if (event.pointerType === "mouse") setIsBrandHovered(true);
-          }}
-          onPointerLeave={() => setIsBrandHovered(false)}
-          onFocus={() => setIsBrandFocused(true)}
-          onBlur={() => setIsBrandFocused(false)}
+          className="mr-auto flex min-w-0 items-center gap-2.5 sm:gap-3"
           onClick={() => setIsMenuOpen(false)}
         >
           <img
-            src={onBlue ? logoWhite : logo}
-            alt="National Professional Internship"
-            className="h-auto max-h-11 w-full max-w-[14.5rem] object-contain sm:max-h-13 lg:max-w-[15.5rem]"
+            src={coatOfArms}
+            alt=""
+            className="h-9 w-auto shrink-0 sm:h-11"
           />
-          {(isBrandHovered || isBrandFocused) && (
-            <WebGLDecoration>
-              <LiquidBrand onBlue={onBlue} />
-            </WebGLDecoration>
-          )}
+          <span className="logo-text text-[0.95rem] sm:text-[1.05rem] xl:text-lg">
+            <span className="block text-white">National Professional</span>
+            <span className="block text-book-yellow">Internship</span>
+          </span>
         </a>
 
         <nav

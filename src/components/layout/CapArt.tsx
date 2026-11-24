@@ -1,21 +1,13 @@
-import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
 
 /*
- * The CTA's picture, in a few treatments to choose from. Every one is built
- * from the program's own material (its cap mark, its name, the certificate
- * it awards, the cover's imigongo), at a modest size, with no glow or loop.
+ * The CTA's picture: the certificate the program awards, built from the
+ * program's own material (its cap mark, its name, the cover's imigongo).
  */
 
-export const CAP_OPTIONS = [
-  { id: "small", label: "Cap" },
-  { id: "certificate", label: "Certificate" },
-] as const;
-
-export type CapOption = (typeof CAP_OPTIONS)[number]["id"];
+export type CapOption = "certificate";
 
 const WHITE = "#ffffff";
-const BLUE = "#2e4d84";
+const BLUE = "#33478e";
 const YELLOW = "#f7d117";
 const SKY = "#3cb4ea";
 const GREEN = "#3f9b4f";
@@ -93,85 +85,14 @@ function Certificate() {
   );
 }
 
-function SmallCap() {
-  return (
-    <svg viewBox="0 20 200 150" aria-hidden="true" className="block size-full">
-      <CapMark />
-    </svg>
-  );
-}
-
 export function CapArt({ option }: { option: CapOption }) {
   switch (option) {
     case "certificate":
       return <Certificate />;
-    case "small":
-      return <SmallCap />;
   }
 }
 
 /** How wide each treatment sits in the band's right column. */
 export const CAP_WIDTH: Record<CapOption, string> = {
   certificate: "max-w-[20rem]",
-  small: "max-w-[13rem]",
 };
-
-const STORAGE_KEY = "cta-cap-choice-v2";
-
-/** Remembers the chosen treatment while they are being compared. */
-export function useCapOption() {
-  const [option, setOption] = useState<CapOption>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (CAP_OPTIONS.some((c) => c.id === saved)) return saved as CapOption;
-    } catch {
-      /* storage unavailable: use the default */
-    }
-    return "small";
-  });
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, option);
-    } catch {
-      /* ignore */
-    }
-  }, [option]);
-  return [option, setOption] as const;
-}
-
-/** Shown on the live site too while the option is being chosen; set to false once picked. */
-export const showCapPicker = true;
-
-export function CapPicker({
-  value,
-  onChange,
-}: {
-  value: CapOption;
-  onChange: (option: CapOption) => void;
-}) {
-  return (
-    <div
-      role="radiogroup"
-      aria-label="Picture option"
-      className="absolute top-5 right-5 z-10 hidden gap-1 lg:flex rounded-full border border-white/20 bg-white/10 p-1 backdrop-blur-sm"
-    >
-      {CAP_OPTIONS.map(({ id, label }) => (
-        <button
-          key={id}
-          type="button"
-          role="radio"
-          aria-checked={value === id}
-          onClick={() => onChange(id)}
-          className={cn(
-            "rounded-full px-3 py-1 text-xs font-bold whitespace-nowrap transition-colors",
-            value === id
-              ? "bg-white text-book-blue"
-              : "text-white/80 hover:text-white",
-          )}
-        >
-          {label}
-        </button>
-      ))}
-    </div>
-  );
-}

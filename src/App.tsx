@@ -14,7 +14,7 @@ import {
 } from "motion/react";
 import { ChevronUp } from "lucide-react";
 import { Button } from "./components/ui/button";
-import { NotificationBanner } from "./components/sections/NotificationBanner";
+// import { NotificationBanner } from "./components/sections/NotificationBanner";
 
 export default function App() {
   const reduceMotion = useReducedMotion();
@@ -35,7 +35,7 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <div className="bg-background selection:bg-primary/10 min-h-screen font-sans selection:text-primary relative">
-        <NotificationBanner />
+        {/* <NotificationBanner /> */}
 
         <Navbar />
 

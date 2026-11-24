@@ -11,7 +11,7 @@ export default function LiquidBrand({ onBlue = false }: { onBlue?: boolean }) {
     >
       <LiquidMetal
         image={onBlue ? logoWhite : logo}
-        colorBack={onBlue ? "#2e4d8400" : "#ffffff00"}
+        colorBack={onBlue ? "#33478e00" : "#ffffff00"}
         colorTint={onBlue ? "#f7d117" : "#7fa6ef"}
         repetition={3}
         softness={0.55}

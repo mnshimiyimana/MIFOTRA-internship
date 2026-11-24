@@ -10,7 +10,7 @@
   --color-portal-blue: #d5e9fc;
   --color-portal-navy: #122970;
   /* Sampled from the printed National Induction Programme cover */
-  --color-book-blue: #2e4d84;
+  --color-book-blue: #33478e;
   --color-book-sky: #3cb4ea;
   --color-book-yellow: #f7d117;
   --font-sans: "Nunito Variable", "Nunito", sans-serif;
@@ -62,7 +62,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #2e4d84;
+  --primary: #33478e;
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -73,7 +73,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: #d9e3ef;
   --input: oklch(0.922 0 0);
-  --ring: #2e4d84;
+  --ring: #33478e;
   --radius: 0.625rem;
 }
 
@@ -129,7 +129,7 @@
   }
 
   .app-wrapper {
-    font-family: Nunito Sans;
+    font-family: var(--font-sans);
     color: #2e2e2e;
     border: 1px solid #ffcb2d;
     background-color: #ffca2d6e;
@@ -192,16 +192,16 @@ main > section[id] {
 }
 
 :where(a, button, summary, [tabindex]):focus-visible {
-  outline: 3px solid #2e4d84;
+  outline: 3px solid #33478e;
   outline-offset: 3px;
   border-radius: 6px;
 }
 
-/* The cover's blue, printed on matte stock: one flat colour everywhere it is
-   used, with a faint grain so it reads as paper rather than a screen fill. */
+/* The KORA banner's blue: deep navy on the left easing into a brighter
+   royal blue on the right. Used on every blue surface. */
 .book-surface {
-  background-color: #2e4d84;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-color: #33478e;
+  background-image: linear-gradient(100deg, #26356c 0%, #33478e 50%, #4863ba 100%);
 }
 
 /* The cover's fine concentric lines: one set spreading from the top-left
@@ -234,11 +234,11 @@ main > section[id] {
   outline-color: #ffffff;
 }
 
-/* Past the hero: the original white bar. */
+/* The bar keeps the hero's blue all the way down the page. */
 .site-header {
-  background: #ffffff;
-  border-bottom: 1px solid #d9e3ef;
-  box-shadow: 0 3px 16px rgb(22 54 104 / 7%);
+  background: #33478e;
+  border-bottom: 1px solid transparent;
+  box-shadow: 0 6px 20px -12px rgb(14 34 80 / 45%);
   transition:
     background-color 250ms ease,
     border-color 250ms ease,
@@ -248,7 +248,8 @@ main > section[id] {
 /* Over the hero: the hero's blue (clear at the very top, so the hero itself
    shows through). */
 .site-header[data-surface="hero"] {
-  background: #2e4d84;
+  background-color: #33478e;
+  background-image: linear-gradient(100deg, #26356c 0%, #33478e 50%, #4863ba 100%);
   border-bottom-color: transparent;
   box-shadow: 0 6px 20px -12px rgb(14 34 80 / 45%);
 }
@@ -421,7 +422,7 @@ main > section[id] {
 
 .bridge-label {
   border: 1px solid rgb(255 255 255 / 35%);
-  background: rgb(46 77 132 / 55%);
+  background: rgb(51 71 142 / 55%);
   box-shadow: 0 10px 24px -12px rgb(10 25 60 / 55%);
   backdrop-filter: blur(10px) saturate(170%);
   -webkit-backdrop-filter: blur(10px) saturate(170%);
@@ -468,7 +469,7 @@ main > section[id] {
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #2e4d84;
+  color: #33478e;
 }
 
 .section-eyebrow::before {
@@ -508,7 +509,7 @@ main > section[id] {
 }
 
 .impact-dot[data-state="placed"] {
-  background: #2e4d84;
+  background: #33478e;
   box-shadow: none;
   transform: scale(1);
 }
@@ -540,4 +541,13 @@ main > section[id] {
   font-size: 1.0625rem;
   line-height: 1.65;
   text-wrap: pretty;
+}
+
+/* The program's name as set in its logo (same words and colours), in the
+   site's Nunito instead of the logo's condensed slab. */
+.logo-text {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
 }

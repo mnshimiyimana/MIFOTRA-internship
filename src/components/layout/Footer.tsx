@@ -3,13 +3,7 @@ import { cn } from "@/lib/utils";
 import { CompanyRegistrationPopover } from "@/components/sections/CompanyRegistrationPopover";
 import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
-import {
-  CAP_WIDTH,
-  CapArt,
-  CapPicker,
-  showCapPicker,
-  useCapOption,
-} from "./CapArt";
+import { CAP_WIDTH, CapArt } from "./CapArt";
 
 
 const programFacts = [
@@ -59,7 +53,6 @@ function FactsPath() {
 }
 
 export function CTA() {
-  const [capOption, setCapOption] = useCapOption();
   return (
     <section className="section-pad bg-white px-6">
       <motion.div
@@ -68,10 +61,6 @@ export function CTA() {
         viewport={{ once: true }}
         className="relative isolate mx-auto max-w-[77rem] overflow-hidden rounded-3xl book-surface px-5 py-12 text-white md:px-12 md:py-16"
       >
-
-        {showCapPicker && (
-          <CapPicker value={capOption} onChange={setCapOption} />
-        )}
 
         <div className="grid items-center gap-10 lg:grid-cols-[1.35fr_1fr]">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 text-center lg:mx-0 lg:items-start lg:text-left">
@@ -114,9 +103,9 @@ export function CTA() {
 
           <div
             aria-hidden="true"
-            className={`mx-auto hidden w-full lg:block ${CAP_WIDTH[capOption]}`}
+            className={`mx-auto hidden w-full lg:block ${CAP_WIDTH.certificate}`}
           >
-            <CapArt option={capOption} />
+            <CapArt option="certificate" />
           </div>
         </div>
       </motion.div>

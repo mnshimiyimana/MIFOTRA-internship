@@ -24,7 +24,7 @@ import {
  */
 
 const NAVY = "#122970";
-const BLUE = "#2e4d84";
+const BLUE = "#33478e";
 const SKY = "#8db7ef";
 const PALE = "#dceaff";
 const GOLD = "#f2c94c";

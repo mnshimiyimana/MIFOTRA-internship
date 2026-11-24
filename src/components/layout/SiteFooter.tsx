@@ -11,7 +11,6 @@ import {
   Youtube,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/logo-removebg-preview.png";
 
 /* ── Shared content ──────────────────────────────────────────────────── */
 
@@ -350,11 +349,10 @@ function HelpDeskFooter() {
 
         <div className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
           <div className="flex flex-col gap-5">
-            <img
-              src={logo}
-              alt="National Professional Internship"
-              className="h-auto w-52"
-            />
+            <p className="logo-text text-xl">
+              <span className="block text-[#093b8e]">National Professional</span>
+              <span className="block text-[#d2830d]">Internship</span>
+            </p>
             <SocialLinks />
           </div>
           <LinkColumns />
