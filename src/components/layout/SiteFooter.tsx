@@ -161,7 +161,7 @@ function LinkColumns({ dark = false }: { dark?: boolean }) {
           <h2
             className={cn(
               "text-xs font-bold tracking-[0.14em] uppercase",
-              dark ? "text-[#a9c4f5]" : "text-portal-navy",
+              dark ? "text-[#a9b3d6]" : "text-portal-navy",
             )}
           >
             {title}
@@ -272,50 +272,57 @@ function PhoneLinks({ className }: { className?: string }) {
 
 function HelpDeskFooter() {
   const row =
-    "group flex min-h-24 items-center gap-4 px-1 py-5 transition-colors sm:px-6 hover:bg-white";
+    "group flex min-h-24 items-center gap-4 px-1 py-5 transition-colors sm:px-6 hover:bg-white/5";
   return (
-    <footer id="footer" className="bg-[#f4f7fb]">
+    <footer id="footer" className="relative isolate overflow-hidden bg-[#171940]">
       <ImigongoBand />
+      {/* The programme's initials, very faint, centred behind the footer */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 text-center font-heading text-[clamp(9rem,34vw,30rem)] leading-none font-black tracking-[0.06em] text-white/[0.04] select-none"
+      >
+        NIP
+      </span>
       <div className="mx-auto max-w-7xl px-6">
         <div className="pt-14">
-          <h2 className="font-heading text-2xl font-bold tracking-tight text-portal-navy sm:text-3xl">
+          <h2 className="font-heading text-2xl font-bold tracking-tight text-white sm:text-3xl">
             Need direct assistance?
           </h2>
-          <p className="mt-2 max-w-xl text-[#4b5b6e]">
+          <p className="mt-2 max-w-xl text-[#b8c2e0]">
             Contact the MIFOTRA Internship secretariat or use our support
             channels.
           </p>
         </div>
 
-        <ul className="mt-8 grid divide-y divide-[#dfe7f1] border-y border-[#dfe7f1] md:grid-cols-3 md:divide-x md:divide-y-0">
+        <ul className="mt-8 grid divide-y divide-white/12 border-y border-white/12 md:grid-cols-3 md:divide-x md:divide-y-0">
           <li className={row}>
-            <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-primary/10 text-primary">
+            <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-white/10 text-white">
               <Phone className="size-5" aria-hidden="true" />
             </span>
             <div>
-              <p className="text-xs font-bold tracking-[0.12em] text-[#5b6b80] uppercase">
+              <p className="text-xs font-bold tracking-[0.12em] text-[#a9b3d6] uppercase">
                 Call us
               </p>
-              <p className="mt-1 font-heading text-lg font-bold text-portal-navy">
-                <PhoneLinks className="hover:text-primary" />
+              <p className="mt-1 font-heading text-lg font-bold text-white">
+                <PhoneLinks />
               </p>
             </div>
           </li>
           <li>
             <a href={`mailto:${EMAIL}`} className={row}>
-              <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-primary/10 text-primary">
+              <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-white/10 text-white">
                 <Mail className="size-5" aria-hidden="true" />
               </span>
               <div className="flex-1">
-                <p className="text-xs font-bold tracking-[0.12em] text-[#5b6b80] uppercase">
+                <p className="text-xs font-bold tracking-[0.12em] text-[#a9b3d6] uppercase">
                   Email us
                 </p>
-                <p className="mt-1 font-heading text-lg font-bold text-portal-navy group-hover:text-primary">
+                <p className="mt-1 font-heading text-lg font-bold text-white">
                   {EMAIL}
                 </p>
               </div>
               <ArrowRight
-                className="size-5 text-primary transition-transform group-hover:translate-x-1"
+                className="size-5 text-[#c9d2ee] transition-transform group-hover:translate-x-1"
                 aria-hidden="true"
               />
             </a>
@@ -327,19 +334,19 @@ function HelpDeskFooter() {
               rel="noopener noreferrer"
               className={row}
             >
-              <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-primary text-white">
+              <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-book-yellow text-[#171940]">
                 <LifeBuoy className="size-5" aria-hidden="true" />
               </span>
               <div className="flex-1">
-                <p className="text-xs font-bold tracking-[0.12em] text-[#5b6b80] uppercase">
+                <p className="text-xs font-bold tracking-[0.12em] text-[#a9b3d6] uppercase">
                   Get help
                 </p>
-                <p className="mt-1 font-heading text-lg font-bold text-portal-navy group-hover:text-primary">
+                <p className="mt-1 font-heading text-lg font-bold text-white">
                   Support portal
                 </p>
               </div>
               <ArrowUpRight
-                className="size-5 text-primary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                className="size-5 text-[#c9d2ee] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                 aria-hidden="true"
               />
               <ExternalHint external />
@@ -350,14 +357,14 @@ function HelpDeskFooter() {
         <div className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
           <div className="flex flex-col gap-5">
             <p className="logo-text text-xl">
-              <span className="block text-[#093b8e]">National Professional</span>
-              <span className="block text-[#d2830d]">Internship</span>
+              <span className="block text-white">National Professional</span>
+              <span className="block text-book-yellow">Internship</span>
             </p>
-            <SocialLinks />
+            <SocialLinks dark />
           </div>
-          <LinkColumns />
+          <LinkColumns dark />
         </div>
-        <BottomBar />
+        <BottomBar dark />
       </div>
     </footer>
   );

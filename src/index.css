@@ -245,6 +245,17 @@ main > section[id] {
     box-shadow 250ms ease;
 }
 
+/* Closes the hairline gap browsers can leave above a sticky bar at
+   fractional zoom levels, so no white line shows over the blue. */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: -2px 0 auto;
+  height: 2px;
+  background: inherit;
+  pointer-events: none;
+}
+
 /* Over the hero: the hero's blue (clear at the very top, so the hero itself
    shows through). */
 .site-header[data-surface="hero"] {
@@ -458,32 +469,6 @@ main > section[id] {
     }
   }
 }
-
-/* ── Section rhythm ────────────────────────────────────────────────── */
-
-.section-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #33478e;
-}
-
-.section-eyebrow::before {
-  content: "";
-  width: 1.5rem;
-  height: 2px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--primary), #f2c94c);
-}
-
-.section-eyebrow-light {
-  color: #bcd3ff;
-}
-
 
 /* ── Impact story (light, hero palette) ─────────────────────────────── */
 

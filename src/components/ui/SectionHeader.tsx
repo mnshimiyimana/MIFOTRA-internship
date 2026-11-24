@@ -2,18 +2,16 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * One header pattern for every section: eyebrow → title → lede.
+ * One header pattern for every section: title → lede.
  * Keeps the type scale and line length (≤ 65ch) consistent across the page.
  */
 export function SectionHeader({
-  eyebrow,
   title,
   lede,
   tone = "light",
   className,
   children,
 }: {
-  eyebrow: string;
   title: ReactNode;
   lede?: ReactNode;
   /** "dark" for sections on a navy background. */
@@ -24,9 +22,6 @@ export function SectionHeader({
   const dark = tone === "dark";
   return (
     <header className={cn("flex flex-col gap-4", className)}>
-      <p className={cn("section-eyebrow", dark && "section-eyebrow-light")}>
-        {eyebrow}
-      </p>
       <h2
         className={cn(
           "section-title font-heading",

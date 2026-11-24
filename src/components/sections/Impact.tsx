@@ -507,7 +507,6 @@ export function Impact() {
     <section id="impact" className="impact-story relative isolate">
       <div className="mx-auto max-w-7xl px-6 pt-[clamp(4rem,3rem+4vw,7rem)]">
         <SectionHeader
-          eyebrow="Our impact"
           title="Results that speak for the program"
           lede="We are proud of the tangible results our program has delivered for graduates and the nation."
           className="mb-6 md:mb-8"

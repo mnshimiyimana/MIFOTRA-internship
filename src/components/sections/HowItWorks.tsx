@@ -1,5 +1,6 @@
 import { BriefcaseBusiness, FileUp, UsersRound } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 
 const steps = [
   {
@@ -49,11 +50,13 @@ export function HowItWorks() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="how-it-works" className="section-pad bg-white">
+    <section id="how-it-works" className="section-pad bg-[#e9f9f9]">
       <div className="mx-auto max-w-7xl px-6">
-        <h2 className="text-center font-heading text-3xl font-extrabold tracking-tight text-portal-navy md:text-5xl">
-          Start in 3 Steps
-        </h2>
+        <SectionHeader
+          title="How It Works"
+          lede="A simple, three-step process to kickstart your professional internship."
+          className="mx-auto items-center text-center"
+        />
 
         <ol className="mx-auto mt-10 flex max-w-6xl flex-col items-stretch gap-8 md:mt-14 lg:flex-row lg:items-start lg:justify-center lg:gap-2">
           {steps.map(({ title, description, icon: Icon, number }, index) => (
@@ -74,10 +77,10 @@ export function HowItWorks() {
                 </span>
                 <span
                   aria-hidden="true"
-                  className="relative grid size-[4.5rem] shrink-0 place-items-center rounded-2xl bg-[#eef2fb] text-[#33478e]"
+                  className="relative grid size-[4.5rem] shrink-0 place-items-center rounded-2xl bg-white text-[#33478e] shadow-[0_8px_20px_-12px_rgb(51_71_142/35%)]"
                 >
                   <Icon className="size-8" strokeWidth={1.6} />
-                  <span className="absolute -top-1 -right-1 size-3 rounded-full bg-book-yellow ring-2 ring-white" />
+                  <span className="absolute -top-1 -right-1 size-3 rounded-full bg-book-yellow ring-2 ring-[#e9f9f9]" />
                 </span>
                 <div className="min-w-0">
                   <h3 className="mt-1 text-lg font-bold text-portal-navy">

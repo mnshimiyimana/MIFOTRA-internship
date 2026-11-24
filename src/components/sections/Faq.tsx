@@ -36,7 +36,6 @@ export function Faq() {
       <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <SectionHeader
-            eyebrow="Frequently asked"
             title="Program Deep Dive"
             lede="Transparency and clarity are our priorities. Find detailed answers to common questions about the National Internship Program (NIP)."
           />

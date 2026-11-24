@@ -29,6 +29,11 @@ export function Hero() {
     >
       <div className="relative mx-auto grid max-w-7xl items-center gap-6 px-6 pt-10 pb-8 md:grid-cols-[1.05fr_1fr] md:gap-4 md:py-12 lg:min-h-[min(40rem,calc(100svh-12rem))]">
         <div className="portal-hero-copy relative z-10 flex max-w-xl flex-col items-start gap-6">
+          <h1 className="font-heading text-[clamp(2.5rem,4.3vw,3.9rem)] leading-[1.01] font-extrabold tracking-[-0.055em] text-white">
+            Embrace Your Future with{" "}
+            <span className="hero-highlight">confidence</span>
+          </h1>
+
           <p className="hero-eyebrow inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-bold tracking-wide text-white">
             <Landmark className="size-3.5" aria-hidden="true" />
             <span>
@@ -40,11 +45,6 @@ export function Hero() {
               · since 2009
             </span>
           </p>
-
-          <h1 className="font-heading text-[clamp(2.5rem,4.3vw,3.9rem)] leading-[1.01] font-extrabold tracking-[-0.055em] text-white">
-            Embrace Your Future with{" "}
-            <span className="hero-highlight">confidence</span>
-          </h1>
 
           <p className="max-w-lg text-base leading-relaxed text-[#d6e4fb] md:text-lg">
             A national pathway connecting talented graduates with institutions
