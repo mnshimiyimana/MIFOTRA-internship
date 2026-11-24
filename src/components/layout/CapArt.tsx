@@ -8,8 +8,8 @@ import { cn } from "@/lib/utils";
  */
 
 export const CAP_OPTIONS = [
+  { id: "small", label: "Cap" },
   { id: "certificate", label: "Certificate" },
-  { id: "small", label: "Small cap" },
 ] as const;
 
 export type CapOption = (typeof CAP_OPTIONS)[number]["id"];
@@ -116,7 +116,7 @@ export const CAP_WIDTH: Record<CapOption, string> = {
   small: "max-w-[13rem]",
 };
 
-const STORAGE_KEY = "cta-cap-choice";
+const STORAGE_KEY = "cta-cap-choice-v2";
 
 /** Remembers the chosen treatment while they are being compared. */
 export function useCapOption() {
@@ -127,7 +127,7 @@ export function useCapOption() {
     } catch {
       /* storage unavailable: use the default */
     }
-    return "certificate";
+    return "small";
   });
   useEffect(() => {
     try {
@@ -139,11 +139,8 @@ export function useCapOption() {
   return [option, setOption] as const;
 }
 
-/** The picker shows only while choosing: on the dev server, or with `?caps`. */
-export const showCapPicker =
-  import.meta.env.DEV ||
-  (typeof window !== "undefined" &&
-    new URLSearchParams(window.location.search).has("caps"));
+/** Shown on the live site too while the option is being chosen; set to false once picked. */
+export const showCapPicker = true;
 
 export function CapPicker({
   value,
@@ -156,7 +153,7 @@ export function CapPicker({
     <div
       role="radiogroup"
       aria-label="Picture option"
-      className="absolute top-5 right-5 z-10 flex gap-1 rounded-full border border-white/20 bg-white/10 p-1 backdrop-blur-sm"
+      className="absolute top-5 right-5 z-10 hidden gap-1 lg:flex rounded-full border border-white/20 bg-white/10 p-1 backdrop-blur-sm"
     >
       {CAP_OPTIONS.map(({ id, label }) => (
         <button
