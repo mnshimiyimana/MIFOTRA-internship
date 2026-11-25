@@ -154,7 +154,7 @@ function ExternalHint({ external }: { external?: boolean }) {
   ) : null;
 }
 
-function LinkColumns({ dark = false }: { dark?: boolean }) {
+function LinkColumns() {
   return (
     <>
       {linkGroups.map(({ title, links }) => (
@@ -162,7 +162,7 @@ function LinkColumns({ dark = false }: { dark?: boolean }) {
           <h2
             className={cn(
               "text-xs font-bold tracking-[0.14em] uppercase",
-              dark ? "text-[#a9b3d6]" : "text-portal-navy",
+              "text-[#a9b3d6]",
             )}
           >
             {title}
@@ -176,9 +176,7 @@ function LinkColumns({ dark = false }: { dark?: boolean }) {
                   rel={link.external ? "noopener noreferrer" : undefined}
                   className={cn(
                     "inline-flex min-h-11 items-center text-sm transition-colors lg:min-h-9",
-                    dark
-                      ? "text-[#d5e1f7] hover:text-white"
-                      : "text-[#4b5b6e] hover:text-primary",
+                    "text-[#d5e1f7] hover:text-white",
                   )}
                 >
                   {link.name}
@@ -193,7 +191,7 @@ function LinkColumns({ dark = false }: { dark?: boolean }) {
   );
 }
 
-function SocialLinks({ dark = false }: { dark?: boolean }) {
+function SocialLinks() {
   return (
     <ul className="flex gap-2">
       {socials.map(({ name, href, icon: Icon }) => (
@@ -205,9 +203,7 @@ function SocialLinks({ dark = false }: { dark?: boolean }) {
             aria-label={`MIFOTRA on ${name}`}
             className={cn(
               "grid size-11 place-items-center rounded-full transition-colors",
-              dark
-                ? "bg-white/8 text-[#d5e1f7] ring-1 ring-white/15 hover:bg-white/15 hover:text-white"
-                : "bg-white text-[#4b5b6e] ring-1 ring-[#dfe7f1] hover:text-primary hover:ring-[#b9cce8]",
+              "bg-white/8 text-[#d5e1f7] ring-1 ring-white/15 hover:bg-white/15 hover:text-white",
             )}
           >
             <Icon className="size-[1.1rem]" aria-hidden="true" />
@@ -218,14 +214,12 @@ function SocialLinks({ dark = false }: { dark?: boolean }) {
   );
 }
 
-function BottomBar({ dark = false }: { dark?: boolean }) {
+function BottomBar() {
   return (
     <div
       className={cn(
         "flex flex-col gap-3 border-t py-6 text-xs sm:flex-row sm:items-center sm:justify-between",
-        dark
-          ? "border-white/12 text-[#a9bbdb]"
-          : "border-[#dfe7f1] text-[#5b6b80]",
+        "border-white/12 text-[#a9bbdb]",
       )}
     >
       <p>
@@ -242,7 +236,7 @@ function BottomBar({ dark = false }: { dark?: boolean }) {
           rel="noopener noreferrer"
           className={cn(
             "inline-flex min-h-11 items-center gap-1 font-semibold hover:underline",
-            dark ? "text-white" : "text-primary",
+            "text-white",
           )}
         >
           Official website
@@ -275,7 +269,10 @@ function HelpDeskFooter() {
   const row =
     "group flex min-h-24 items-center gap-4 px-1 py-5 transition-colors sm:px-6 hover:bg-white/5";
   return (
-    <footer id="footer" className="relative isolate overflow-hidden bg-[#171940]">
+    <footer
+      id="footer"
+      className="relative isolate overflow-hidden bg-[#171940]"
+    >
       <ImigongoBand />
       {/* The programme's initials, very faint, centred behind the footer */}
       <span
@@ -358,21 +355,17 @@ function HelpDeskFooter() {
         <div className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
           <div className="flex flex-col gap-5">
             <div className="flex items-center gap-3">
-              <img
-                src={coatOfArms}
-                alt=""
-                className="h-11 w-auto shrink-0"
-              />
+              <img src={coatOfArms} alt="" className="h-11 w-auto shrink-0" />
               <p className="logo-text text-xl">
                 <span className="block text-white">National Professional</span>
                 <span className="block text-book-yellow">Internship</span>
               </p>
             </div>
-            <SocialLinks dark />
+            <SocialLinks />
           </div>
-          <LinkColumns dark />
+          <LinkColumns />
         </div>
-        <BottomBar dark />
+        <BottomBar />
       </div>
     </footer>
   );

@@ -34,7 +34,7 @@ function detectWebGL2() {
 }
 
 /** True when the user allows motion and the browser supports WebGL2. */
-export function useWebGLEnabled() {
+function useWebGLEnabled() {
   // Decided before the first paint, so the static fallback never flashes up
   // on devices that will show the 3D scene.
   const [enabled, setEnabled] = useState(
@@ -80,36 +80,6 @@ export function useNearViewport(
   }, [ref, margin]);
 
   return near;
-}
-
-/**
- * Becomes true once the page has loaded and the browser is idle. Heavy WebGL
- * scenes mount at that point (paused) so shader compilation never lands in
- * the middle of a scroll.
- */
-export function useIdleMount(timeout = 2500) {
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    let idle = 0;
-    let fallback: ReturnType<typeof setTimeout> | undefined;
-    const schedule = () => {
-      if ("requestIdleCallback" in window) {
-        idle = window.requestIdleCallback(() => setReady(true), { timeout });
-      } else {
-        fallback = globalThis.setTimeout(() => setReady(true), 1200);
-      }
-    };
-    if (document.readyState === "complete") schedule();
-    else window.addEventListener("load", schedule, { once: true });
-    return () => {
-      window.removeEventListener("load", schedule);
-      if (idle) window.cancelIdleCallback(idle);
-      globalThis.clearTimeout(fallback);
-    };
-  }, [timeout]);
-
-  return ready;
 }
 
 export function WebGLDecoration({

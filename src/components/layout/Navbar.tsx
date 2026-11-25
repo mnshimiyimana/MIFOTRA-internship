@@ -5,7 +5,6 @@ import { CompanyRegistrationPopover } from "@/components/sections/CompanyRegistr
 import coatOfArms from "@/assets/coat-of-arms-white.png";
 import { cn } from "@/lib/utils";
 
-
 const navLinks = [
   { name: "Home", href: "#home" },
   { name: "About Us", href: "#about" },
@@ -68,7 +67,6 @@ export function Navbar() {
   // The hero's blue all the way down (clear at the very top, where the hero
   // itself shows through).
   const surface = atTop && !isMenuOpen ? "clear" : "hero";
-  const onBlue = true;
 
   return (
     <header
@@ -112,9 +110,7 @@ export function Navbar() {
               aria-current={activeSection === href ? "location" : undefined}
               className={cn(
                 "relative whitespace-nowrap px-3 py-3 text-sm font-bold transition-colors after:absolute after:inset-x-3 after:bottom-1 after:h-0.5 after:origin-center after:scale-x-0 after:rounded-full after:transition-transform hover:after:scale-x-100 focus-visible:after:scale-x-100 aria-[current=location]:after:scale-x-100 xl:px-4",
-                onBlue
-                  ? "text-white/80 after:bg-book-yellow hover:text-white aria-[current=location]:text-white"
-                  : "text-[#22324a] after:bg-primary hover:text-primary aria-[current=location]:text-primary",
+                "text-white/80 after:bg-book-yellow hover:text-white aria-[current=location]:text-white",
               )}
             >
               {name}
@@ -128,9 +124,7 @@ export function Navbar() {
           rel="noopener noreferrer"
           className={cn(
             "inline-flex min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-3.5 text-sm font-bold transition-colors sm:px-5",
-            onBlue
-              ? "bg-white text-book-blue hover:bg-[#eaf2ff]"
-              : "bg-primary text-white hover:bg-[#24448a]",
+            "bg-white text-book-blue hover:bg-[#eaf2ff]",
           )}
         >
           <LogIn className="hidden size-4 sm:block" aria-hidden="true" />
@@ -146,7 +140,7 @@ export function Navbar() {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className={cn(
             "grid size-11 shrink-0 place-items-center rounded-full lg:hidden",
-            onBlue ? "text-white hover:bg-white/10" : "hover:bg-primary/10",
+            "text-white hover:bg-white/10",
           )}
         >
           {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
@@ -164,7 +158,7 @@ export function Navbar() {
             transition={{ duration: 0.18 }}
             className={cn(
               "absolute inset-x-0 top-full grid gap-1 px-4 py-3 shadow-lg sm:px-6 lg:hidden",
-              onBlue ? "border-t border-white/10 bg-book-blue" : "border-b bg-white",
+              "border-t border-white/10 bg-book-blue",
             )}
           >
             {navLinks.map(({ name, href, target }) => (
@@ -177,9 +171,7 @@ export function Navbar() {
                 onClick={() => setIsMenuOpen(false)}
                 className={cn(
                   "rounded-xl px-4 py-3 font-bold",
-                  onBlue
-                    ? "text-white/85 hover:bg-white/10 hover:text-white aria-[current=location]:bg-white/10 aria-[current=location]:text-white"
-                    : "text-portal-navy hover:bg-primary/5 aria-[current=location]:bg-primary/10 aria-[current=location]:text-primary",
+                  "text-white/85 hover:bg-white/10 hover:text-white aria-[current=location]:bg-white/10 aria-[current=location]:text-white",
                 )}
               >
                 {name}
@@ -188,7 +180,7 @@ export function Navbar() {
             <div
               className={cn(
                 "mt-2 grid gap-2 border-t pt-4 pb-1 sm:grid-cols-2",
-                onBlue ? "border-white/10" : "border-[#d9e3ef]",
+                "border-white/10",
               )}
             >
               <a
@@ -198,9 +190,7 @@ export function Navbar() {
                 onClick={() => setIsMenuOpen(false)}
                 className={cn(
                   "inline-flex h-12 items-center justify-center gap-2 rounded-full px-5 text-sm font-bold",
-                  onBlue
-                    ? "bg-white text-book-blue hover:bg-[#eaf2ff]"
-                    : "bg-primary text-white hover:bg-[#24448a]",
+                  "bg-white text-book-blue hover:bg-[#eaf2ff]",
                 )}
               >
                 Apply for Internship
@@ -209,9 +199,7 @@ export function Navbar() {
               <CompanyRegistrationPopover
                 className={cn(
                   "inline-flex h-12 items-center justify-center gap-2 rounded-full border px-5 text-sm font-bold",
-                  onBlue
-                    ? "border-white/40 bg-white/10 text-white hover:bg-white/20"
-                    : "border-[#b9cce8] bg-white text-primary hover:bg-[#f5f9ff]",
+                  "border-white/40 bg-white/10 text-white hover:bg-white/20",
                 )}
               >
                 <Building2 className="size-4" aria-hidden="true" />

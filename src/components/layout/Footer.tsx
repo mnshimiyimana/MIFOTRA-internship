@@ -3,8 +3,7 @@ import { cn } from "@/lib/utils";
 import { CompanyRegistrationPopover } from "@/components/sections/CompanyRegistrationPopover";
 import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
-import { CAP_WIDTH, CapArt } from "./CapArt";
-
+import { Certificate } from "./Certificate";
 
 const programFacts = [
   {
@@ -61,7 +60,6 @@ export function CTA() {
         viewport={{ once: true }}
         className="relative isolate mx-auto max-w-[77rem] overflow-hidden rounded-3xl book-surface px-5 py-12 text-white md:px-12 md:py-16"
       >
-
         <div className="grid items-center gap-10 lg:grid-cols-[1.35fr_1fr]">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 text-center lg:mx-0 lg:items-start lg:text-left">
             <h2 className="text-3xl md:text-5xl font-heading font-bold tracking-tight leading-tight">
@@ -103,9 +101,9 @@ export function CTA() {
 
           <div
             aria-hidden="true"
-            className={`mx-auto hidden w-full lg:block ${CAP_WIDTH.certificate}`}
+            className="mx-auto hidden w-full max-w-[20rem] lg:block"
           >
-            <CapArt option="certificate" />
+            <Certificate />
           </div>
         </div>
       </motion.div>

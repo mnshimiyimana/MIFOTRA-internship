@@ -1,12 +1,8 @@
-
 /*
  * The CTA's picture: the certificate the program awards, built from the
  * program's own material (its cap mark, its name, the cover's imigongo).
  */
 
-export type CapOption = "certificate";
-
-const WHITE = "#ffffff";
 const BLUE = "#33478e";
 const YELLOW = "#f7d117";
 const SKY = "#3cb4ea";
@@ -16,24 +12,32 @@ const BOARD = "M100 28 194 70 100 112 6 70Z";
 const SKULL = "M42 90v38c0 13 26 30 58 30s58-17 58-30V90l-58 26Z";
 
 /** The program's cap mark, solid, in a 200×200 box. */
-function CapMark({ fill = WHITE, tassel = YELLOW }) {
+function CapMark({ fill, tassel }: { fill: string; tassel: string }) {
   return (
     <>
       <path d={BOARD} fill={fill} />
       <path d={SKULL} fill={fill} />
-      <path d="M172 78v52" stroke={tassel} strokeWidth="7" strokeLinecap="round" />
+      <path
+        d="M172 78v52"
+        stroke={tassel}
+        strokeWidth="7"
+        strokeLinecap="round"
+      />
       <rect x="162" y="128" width="20" height="34" rx="8" fill={tassel} />
     </>
   );
 }
 
-/* ── Certificate card ────────────────────────────────────────────────── */
-
-function Certificate() {
+export function Certificate() {
   return (
     <div className="w-full overflow-hidden rounded-2xl bg-white text-left shadow-[0_24px_50px_-24px_rgb(8_22_56/70%)]">
       {/* A strip of the cover's chevrons along the top edge */}
-      <svg viewBox="0 0 320 14" preserveAspectRatio="none" aria-hidden="true" className="block h-3.5 w-full">
+      <svg
+        viewBox="0 0 320 14"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        className="block h-3.5 w-full"
+      >
         {Array.from({ length: 23 }, (_, k) => (
           <path
             key={k}
@@ -84,15 +88,3 @@ function Certificate() {
     </div>
   );
 }
-
-export function CapArt({ option }: { option: CapOption }) {
-  switch (option) {
-    case "certificate":
-      return <Certificate />;
-  }
-}
-
-/** How wide each treatment sits in the band's right column. */
-export const CAP_WIDTH: Record<CapOption, string> = {
-  certificate: "max-w-[20rem]",
-};

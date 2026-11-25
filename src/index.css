@@ -55,7 +55,6 @@
 }
 
 :root {
-  --white: #ffffff;
   --background: #ffff;
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -121,60 +120,6 @@
   html {
     @apply font-sans;
   }
-  .nav-top-notifier {
-    position: fixed;
-    z-index: 10;
-    left: 0;
-    bottom: 0;
-  }
-
-  .app-wrapper {
-    font-family: var(--font-sans);
-    color: #2e2e2e;
-    border: 1px solid #ffcb2d;
-    background-color: #ffca2d6e;
-    position: relative;
-    height: 55px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-  }
-  .flex-center {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-  .ico-bell {
-    color: #0099e8;
-    width: 24px;
-    height: 24px;
-  }
-  .feather-bell {
-    color: #0099e8;
-  }
-  .app-message {
-    padding: 10px 40px 10px 10px;
-    margin-top: 0;
-  }
-  .app-message a {
-    color: var(--color-blue-600);
-    text-decoration: none;
-  }
-}
-
-@theme {
-  --animate-marquee: marquee 60s linear infinite;
-
-  @keyframes marquee {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
 }
 
 html {
@@ -237,56 +182,26 @@ main > section[id] {
 /* The bar keeps the hero's blue all the way down the page. */
 .site-header {
   background: #33478e;
-  border-bottom: 1px solid transparent;
   box-shadow: 0 6px 20px -12px rgb(14 34 80 / 45%);
   transition:
     background-color 250ms ease,
-    border-color 250ms ease,
     box-shadow 250ms ease;
 }
 
-/* Closes the hairline gap browsers can leave above a sticky bar at
-   fractional zoom levels, so no white line shows over the blue. */
-.site-header::before {
-  content: "";
-  position: absolute;
-  inset: -2px 0 auto;
-  height: 2px;
-  background: inherit;
-  pointer-events: none;
-}
-
-/* Over the hero: the hero's blue (clear at the very top, so the hero itself
-   shows through). */
+/* Once scrolled, the bar carries the hero's gradient. */
 .site-header[data-surface="hero"] {
-  background-color: #33478e;
   background-image: linear-gradient(100deg, #26356c 0%, #33478e 50%, #4863ba 100%);
-  border-bottom-color: transparent;
-  box-shadow: 0 6px 20px -12px rgb(14 34 80 / 45%);
 }
 
+/* At the very top it is clear, so the hero itself shows through. */
 .site-header[data-surface="clear"] {
   background: transparent;
-  border-bottom-color: transparent;
   box-shadow: none;
 }
 
 .site-header[data-surface="clear"] :focus-visible,
 .site-header[data-surface="hero"] :focus-visible {
   outline-color: #ffffff;
-}
-
-.workflow-illustration {
-  background: radial-gradient(ellipse at 49% 44%, #edf7ff, #cbdff6 76%);
-}
-
-.workflow-illustration-rings {
-  background: repeating-radial-gradient(
-    circle at center,
-    transparent 0 22px,
-    rgb(91 139 193 / 18%) 22px 23px
-  );
-  mask-image: radial-gradient(circle, black 32%, transparent 72%);
 }
 
 .program-card-title {
@@ -356,17 +271,6 @@ main > section[id] {
 .internship-approval {
   width: 11cqw;
   aspect-ratio: 1;
-}
-
-.portal-card {
-  transition:
-    box-shadow 200ms ease,
-    border-color 200ms ease;
-}
-
-.portal-card:hover {
-  border-color: #a3bce7;
-  box-shadow: 0 10px 24px rgb(18 41 112 / 8%);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -453,20 +357,6 @@ main > section[id] {
 
   .portal-hero-copy > :nth-child(4) {
     animation-delay: 210ms;
-  }
-
-  /* Gentle entrance for content blocks as they scroll into view */
-  .reveal {
-    animation: reveal-up linear both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 55%;
-  }
-
-  @keyframes reveal-up {
-    from {
-      opacity: 0;
-      transform: translateY(28px) scale(0.985);
-    }
   }
 }
 
