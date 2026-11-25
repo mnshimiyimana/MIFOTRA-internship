@@ -10,6 +10,7 @@ import {
   Twitter,
   Youtube,
 } from "lucide-react";
+import coatOfArms from "@/assets/coat-of-arms-white.png";
 import { cn } from "@/lib/utils";
 
 /* ── Shared content ──────────────────────────────────────────────────── */
@@ -356,10 +357,17 @@ function HelpDeskFooter() {
 
         <div className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
           <div className="flex flex-col gap-5">
-            <p className="logo-text text-xl">
-              <span className="block text-white">National Professional</span>
-              <span className="block text-book-yellow">Internship</span>
-            </p>
+            <div className="flex items-center gap-3">
+              <img
+                src={coatOfArms}
+                alt=""
+                className="h-11 w-auto shrink-0"
+              />
+              <p className="logo-text text-xl">
+                <span className="block text-white">National Professional</span>
+                <span className="block text-book-yellow">Internship</span>
+              </p>
+            </div>
             <SocialLinks dark />
           </div>
           <LinkColumns dark />

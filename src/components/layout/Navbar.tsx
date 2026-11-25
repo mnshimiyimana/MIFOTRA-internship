@@ -93,7 +93,7 @@ export function Navbar() {
             alt=""
             className="h-9 w-auto shrink-0 sm:h-11"
           />
-          <span className="logo-text text-[0.95rem] sm:text-[1.05rem] xl:text-lg">
+          <span className="logo-text text-base sm:text-xl">
             <span className="block text-white">National Professional</span>
             <span className="block text-book-yellow">Internship</span>
           </span>
